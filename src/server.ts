@@ -73,7 +73,7 @@ export default class Server {
         this.app.use(errorHandler());
         this.app.use(bodyParser.text());
         this.app.use(cors({
-            origin: ["https://illuminantgames.com/", "http://localhost:3000/"],
+            origin: ["https://illuminantgames.com", "http://localhost:3000"],
             exposedHeaders: [sequenceIdHeader]
         }));
 
