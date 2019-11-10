@@ -5,9 +5,10 @@
   "description": "Relay server used by gTove for signalling and TURN",
   "main": "build/start.js",
   "scripts": {
+    "dev": "ts-node-dev --trace-warnings --transpileOnly -- src/start.ts",
     "test": "jest --config jestconfig.json",
-    "start": "ts-node-dev --trace-warnings --transpileOnly -- src/start.ts",
-    "build": "tsc"
+    "build": "tsc",
+    "start": "node build/start.js"
   },
   "author": "Rob Rendell",
   "dependencies": {
