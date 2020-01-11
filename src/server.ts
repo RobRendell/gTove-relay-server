@@ -91,6 +91,7 @@ export default class Server {
     private addEndpoint(handler: BaseEndpointHandler) {
         let callbacks: express.RequestHandler[] = [];
         callbacks.push(handler.handle);
+        this.app.options(handler.requestPath, cors());
         switch (handler.method) {
             case Method.POST:
                 this.app.post(handler.requestPath, callbacks);
