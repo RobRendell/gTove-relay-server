@@ -87,7 +87,21 @@ export class McastService {
             };
         } else {
             return new Promise<McastGetResponse>((resolve) => {
-                channel.pending.push(resolve);
+                let resolved = false;
+                const timeout = setTimeout(() => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve({payload: '{}', sequenceId: sequenceId || channel.sequenceId});
+                    }
+                }, 20000);
+                channel.pending.push((value) => {
+                    if (!resolved) {
+                        resolved = true;
+                        resolve(value);
+                        clearTimeout(timeout);
+                    }
+                });
+
             });
         }
     }

@@ -58,11 +58,18 @@ export class LinkService {
             return message.payload;
         } else {
             if (channel.pending) {
-                // Can't have more than one pending get, so resolve it with an empty string
-                channel.pending('');
+                // Can't have more than one pending get
+                channel.pending('{}');
             }
             return await new Promise<string>((resolve) => {
-                channel.pending = resolve;
+                const timeout = setTimeout(() => {
+                    resolve('{}');
+                    channel.pending = undefined;
+                }, 20000);
+                channel.pending = (value) => {
+                    resolve(value);
+                    clearTimeout(timeout);
+                }
             });
         }
     }

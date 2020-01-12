@@ -8,7 +8,8 @@
     "dev": "ts-node-dev --trace-warnings --transpileOnly -- src/start.ts",
     "test": "jest --config jestconfig.json",
     "build": "tsc",
-    "start": "node build/start.js"
+    "start": "node build/start.js",
+    "start-idea": "tsc && node build/start.js"
   },
   "author": "Rob Rendell",
   "dependencies": {
